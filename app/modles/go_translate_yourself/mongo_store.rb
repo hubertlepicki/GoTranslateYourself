@@ -8,11 +8,10 @@ module GoTranslateYourself
     end
 
     def keys
-      dev_translations = YAML.load_file(File.join(Rails.root, "config", "locales", "dev.yml"))
       if @dev_translations.nil? || Rails.env.development?
-        @dev_translations = {}
-        flatten_keys(nil, dev_translations["dev"], @dev_translations)
-        @keys = GoTranslateYourself.locales.collect {|lang| @dev_translations.keys.collect {|key| "#{lang}.#{key}"} }.flatten
+        load_dev_translations
+
+        @keys = GoTranslateYourself.locales.collect {|lang| keys_without_prefix.collect {|key| "#{lang}.#{key}"} }.flatten
       end
 
       @keys 
@@ -22,7 +21,7 @@ module GoTranslateYourself
       if document = collection.find_one(_id: key)
         document["value"]
       else
-        @dev_translations[key.to_s.gsub(/^[a-z]*\./, "")]
+        default_translation(key)
       end
     end
 
@@ -34,7 +33,22 @@ module GoTranslateYourself
       collection.drop
     end
 
+    def default_translation(key)
+      @dev_translations[key.to_s.gsub(/^[a-z]*\./, "")]
+    end
+
+    def keys_without_prefix 
+      load_dev_translations unless @dev_translations
+      @dev_translations.keys
+    end
+
     private
+
+    def load_dev_translations
+      dev_translations = YAML.load_file(File.join(Rails.root, "config", "locales", "dev.yml"))
+      @dev_translations = {}
+      flatten_keys(nil, dev_translations["dev"], @dev_translations)
+    end
 
     def collection
       @db["go_translate_yourself_translations"]
