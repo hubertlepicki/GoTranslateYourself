@@ -1,7 +1,8 @@
 source "http://rubygems.org"
 
 gem "rails", "3.0.0"
-gem "bson_ext", ">=1.0.4"
+gem "mongo", "1.1"
+gem "bson_ext", ">=1.0.5"
 
 if RUBY_VERSION < '1.9'
   gem "ruby-debug", ">= 0.10.3"
