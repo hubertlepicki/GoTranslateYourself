@@ -14,6 +14,7 @@ module GoTranslateYourself
     end
 
     def default_translation(key)
+      load_dev_translations unless @dev_translations
       @dev_translations[key.to_s.gsub(/^[a-z]*\./, "")]
     end
 

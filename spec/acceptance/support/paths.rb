@@ -1,12 +1,12 @@
 module NavigationHelpers
   # Put helper methods related to the paths in your application here.
 
-  def homepage(lang = nil)
-    "/#{"?lang=#{lang}" if lang}" 
+  def homepage(locale = nil)
+    "/#{"?locale=#{locale}" if locale}" 
   end
 
   def translate
-    "/translate_site"
+    "/site_translations"
   end
 end
 

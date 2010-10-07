@@ -13,15 +13,13 @@ feature "Translations management", %q{
   scenario "Seeing a list of default translations" do
     visit translate
     page.should have_content "hello"
-    page.should have_content "Hello world!"
-    page.should have_content "site[name]"
-    page.should have_content "Some random web site" 
+    page.should have_content "site.name"
   end
 
   scenario "Entering translations" do
     visit translate
-    fill_in "Witaj, świecie", with: "t[pl][hello]"
-    fill_in "Wilkommen!", with: "t[de][hello]"
+    fill_in "translations[pl.hello]", with: "Witaj, świecie"
+    fill_in "translations[de.hello]", with: "Wilkommen!"
     click_button "Save"
     visit homepage("pl")
     page.should have_content("Witaj, świecie")

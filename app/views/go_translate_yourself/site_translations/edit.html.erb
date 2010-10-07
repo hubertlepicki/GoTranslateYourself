@@ -1,3 +1,17 @@
-<% @keys.each do |key| %>
-  <%= key %>
+<%= form_tag update_site_translations_path, :method => :post do %>
+  <table>
+    <% @keys.each do |key| %>
+      <tr>
+        <td>
+          <%= key %>
+        </td>
+        <% @locales.each do |locale| %>
+          <td>
+            <%= text_field_tag "translations[#{locale}.#{key}]", GoTranslateYourself.current_store["#{locale}.#{key}"] %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <%= submit_tag "Save" %>
 <% end %>
