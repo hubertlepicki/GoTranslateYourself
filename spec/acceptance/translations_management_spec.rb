@@ -14,14 +14,14 @@ feature "Translations management", %q{
     visit translate
     page.should have_content "hello"
     page.should have_content "Hello world!"
-    page.should have_content "site.name"
+    page.should have_content "site[name]"
     page.should have_content "Some random web site" 
   end
 
   scenario "Entering translations" do
     visit translate
-    fill_in "Witaj, świecie", within: "pl.hello"
-    fill_in "Wilkommen!", within: "de.hello"
+    fill_in "Witaj, świecie", with: "t[pl][hello]"
+    fill_in "Wilkommen!", with: "t[de][hello]"
     click_button "Save"
     visit homepage("pl")
     page.should have_content("Witaj, świecie")

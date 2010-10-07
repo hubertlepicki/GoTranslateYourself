@@ -1,0 +1,5 @@
+dev:
+  hello: "Hello world!"
+  site:
+    name: "Some random web site"
+    
