@@ -34,4 +34,9 @@ Visit http://localhost:3000/site_translations to see it working!
 
 Currently only MongoDB is supported -- please feel free to add more stores (Riak would be nice!).
 
+== Roadmap
+
+* implement SQLStore for using SQL databases
+* implement RiakStore for using Riak
+
 This project rocks and uses MIT-LICENSE.
