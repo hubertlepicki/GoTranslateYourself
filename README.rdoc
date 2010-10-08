@@ -1,3 +1,11 @@
 = GoTranslateYourself
 
+GoTranslateYouself is Rails engine, that allows your clients to do the dirty work of translating applications on their own. You don't have to do it yourself, let them have a piece of fun of their own!
+
+This project is inspired by DHH's Tolk (http://github.com/dhh/told), however it has a bit differen UI, provides way to integrate with existing admin panel layout and is using key-value stores, with translation fallbacks.
+
+= TODO
+
+Write more info here.
+
 This project rocks and uses MIT-LICENSE.
