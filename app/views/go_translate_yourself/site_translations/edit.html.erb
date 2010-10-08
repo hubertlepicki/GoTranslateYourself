@@ -1,9 +1,19 @@
 <%= form_tag update_site_translations_path, :method => :post do %>
   <table>
+    <tr>
+      <th>Key</th>
+      <th>Default</th>
+      <% @locales.each do |locale| %>
+        <th><%= locale %></th>
+      <% end %>
+    </tr>
     <% @keys.each do |key| %>
       <tr>
         <td>
           <%= key %>
+        </td>
+        <td>
+          <%= GoTranslateYourself.current_store.default_translation(key) %>
         </td>
         <% @locales.each do |locale| %>
           <td>
