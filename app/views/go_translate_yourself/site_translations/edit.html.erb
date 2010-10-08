@@ -13,7 +13,7 @@
           <%= key %>
         </td>
         <td>
-          <%= GoTranslateYourself.current_store.default_translation(key) %>
+          <%= GoTranslateYourself.current_store.default_translation("#{dev}.#{key}") %>
         </td>
         <% @locales.each do |locale| %>
           <td>
