@@ -4,8 +4,34 @@ GoTranslateYouself is Rails engine, that allows your clients to do the dirty wor
 
 This project is inspired by DHH's Tolk (http://github.com/dhh/told), however it has a bit differen UI, provides way to integrate with existing admin panel layout and is using key-value stores, with translation fallbacks.
 
-= TODO
 
-Write more info here.
+== Installation
+TODO: Write more info here.
+
+== Usage
+
+Create initializer in your Rails app, following this code:
+
+    conn = Mongo::Connection.new.db("go_translate_yourself_test").collection("translations")
+    GoTranslateYourself.current_store = GoTranslateYourself::MongoStore.new(conn)
+    GoTranslateYourself.locales = [:pl, :de]
+
+    I18n.backend = I18n::Backend::KeyValue.new GoTranslateYourself.current_store
+
+    GoTranslateYourself.auth_handler = proc {
+      authenticate_or_request_with_http_basic do |user_name, password|
+        user_name == 'some' && password == 'user'
+      end
+    }
+
+    GoTranslateYourself.layout_name = "dummy_admin"
+
+Please note, that you can integrate auth_handler with your authentication solution (like Devise), or leave it blank for no authentication.
+
+Visit http://localhost:3000/site_translations to see it working!
+
+== Available stores
+
+Currently only MongoDB is supported -- please feel free to add more stores (Riak would be nice!).
 
 This project rocks and uses MIT-LICENSE.
