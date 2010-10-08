@@ -23,7 +23,7 @@ spec = Gem::Specification.new do |s|
   s.summary = "Insert GoTranslateYourself summary."
   s.description = "Insert GoTranslateYourself description."
   s.files =  FileList["[A-Z]*", "lib/**/*", "app/**/*", "config/routes.rb"]
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|
