@@ -1,24 +1,26 @@
 <%= form_tag update_site_translations_path, :method => :post do %>
-  <table>
-    <tr>
+  <table class="gt_site_translations">
+    <tr class="gt_ths">
       <th>Key</th>
-      <th>Default</th>
-      <% @locales.each do |locale| %>
-        <th><%= locale %></th>
-      <% end %>
+      <th>Value</th>
     </tr>
     <% @keys.each do |key| %>
-      <tr>
-        <td>
+      <tr class="gt_default_value">
+        <td class="gt_key">
           <%= key %>
         </td>
-        <td>
+        <td class="gt_value">
           <%= GoTranslateYourself.current_store.default_translation("dev.#{key}") %>
         </td>
         <% @locales.each do |locale| %>
-          <td>
-            <%= text_field_tag "translations[#{locale}.#{key}]", GoTranslateYourself.current_store["#{locale}.#{key}"] %>
-          </td>
+          <tr>
+            <td>
+              <%= locale %>
+            </td>
+            <td>
+              <%= text_field_tag "translations[#{locale}.#{key}]", GoTranslateYourself.current_store["#{locale}.#{key}"] %>
+            </td>
+          </tr>
         <% end %>
       </tr>
     <% end %>
