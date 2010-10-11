@@ -18,14 +18,7 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-spec = Gem::Specification.new do |s|
-  s.name = "go_translate_yourself"
-  s.summary = "Insert GoTranslateYourself summary."
-  s.description = "Insert GoTranslateYourself description."
-  s.files =  FileList["[A-Z]*", "lib/**/*", "app/**/*", "config/routes.rb"]
-  s.version = "0.0.4"
-end
-
+spec = eval(File.read("go_translate_yourself.gemspec"))
 Rake::GemPackageTask.new(spec) do |pkg|
 end
 
