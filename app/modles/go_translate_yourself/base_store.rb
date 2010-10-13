@@ -37,7 +37,7 @@ module GoTranslateYourself
         if value.kind_of?(Hash)
           flatten_keys full_key, value, dest_hash
         else
-          dest_hash[full_key] = value
+          dest_hash[full_key] = ActiveSupport::JSON.encode(value)
         end
       end
     end

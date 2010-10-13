@@ -5,7 +5,7 @@ module GoTranslateYourself
     end
 
     def []=(key, value)
-      collection.update({_id: key}, {'$set' => {:value => value}}, upsert: true, safe: true)
+      collection.update({_id: key}, {'$set' => {:value => ActiveSupport::JSON.encode(value)}}, upsert: true, safe: true)
     end
 
     def [](key)

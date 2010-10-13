@@ -15,11 +15,16 @@ describe GoTranslateYourself::MongoStore do
   end
 
   it "should get default values from dev.yml when not provided translations yet" do
-    @store["pl.hello"].should eql("Hello world!") 
+    @store["pl.hello"].should eql("\"Hello world!\"") 
   end
 
   it "should be possible to set translation value" do
     @store["pl.hello"] = "Witaj, świecie!"
-    @store["pl.hello"].should eql("Witaj, świecie!")
+    @store["pl.hello"].should eql("\"Witaj, \\u015bwiecie!\"")
+  end
+
+  it "should encode JSON and decode on storing/getting, without throwing exceptions" do
+    @store["pl.hello"] = "Witaj, świec{{elo}}ie!"
+    @store["pl.hello"].should eql("\"Witaj, \\u015bwiec{{elo}}ie!\"")
   end
 end

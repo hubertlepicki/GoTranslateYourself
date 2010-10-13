@@ -19,7 +19,7 @@
               <%= locale %>
             </td>
             <td>
-              <%= text_field_tag "translations[#{locale}.#{key}]", GoTranslateYourself.current_store["#{locale}.#{key}"] %>
+              <%= text_field_tag "translations[#{locale}.#{key}]", ActiveSupport::JSON.decode(GoTranslateYourself.current_store["#{locale}.#{key}"] || "") %>
             </td>
           </tr>
         <% end %>
