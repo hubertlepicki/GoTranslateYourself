@@ -9,6 +9,7 @@ module GoTranslateYourself
     end
 
     def [](key)
+      load_dev_translations if Rails.env.development?
       if document = collection.find_one(_id: key)
         document["value"]
       else
