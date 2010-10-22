@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = ">= 1.3.6"
 
-  s.files        = Dir.glob("{app,lib}/**/*") + %w(LICENSE README.rdoc)
+  s.files        = Dir.glob("{app,lib,config}/**/*") + %w(LICENSE README.rdoc)
   s.require_path = 'lib'
 end
 
