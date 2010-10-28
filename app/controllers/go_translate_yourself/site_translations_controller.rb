@@ -3,7 +3,11 @@ module GoTranslateYourself
     before_filter :auth
 
     def edit
-      @keys = GoTranslateYourself.current_store.keys_without_prefix
+      @translations = Hash[
+        *GoTranslateYourself.current_store.keys_without_prefix.collect do |key| 
+          [key, GoTranslateYourself.current_store.default_translation("dev.#{key}")]
+        end.flatten
+      ]
       @locales = GoTranslateYourself.locales
       render :layout => GoTranslateYourself.layout_name
     end

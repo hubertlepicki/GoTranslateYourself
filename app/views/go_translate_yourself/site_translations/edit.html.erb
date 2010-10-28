@@ -4,9 +4,10 @@
       <th>Key</th>
       <th>Value</th>
     </tr>
-    <% @keys.each do |key| %>
-      <%- default_translation = GoTranslateYourself.current_store.default_translation("dev.#{key}") %>
-      <tr class="gt_separator"><td colspan="2"></td></tr>
+    <% @translations.each do |key, default_translation| %>
+      <tr class="gt_separator">
+        <td colspan="2"></td>
+      </tr>
       <tr class="gt_default_value">
         <td class="gt_key">
           <%= key %>
@@ -20,7 +21,7 @@
               <%= locale %>
             </td>
             <td>
-              <%= text_field_tag "translations[#{locale}.#{key}]", ActiveSupport::JSON.decode(GoTranslateYourself.current_store["#{locale}.#{key}"] || ""), :size => (default_translation.size + 20) %>
+              <%= translation_text_field locale, key, default_translation %>
             </td>
           </tr>
         <% end %>
