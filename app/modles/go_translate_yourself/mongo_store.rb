@@ -5,12 +5,12 @@ module GoTranslateYourself
     end
 
     def []=(key, value)
-      collection.update({_id: key}, {'$set' => {:value => ActiveSupport::JSON.encode(value)}}, upsert: true, safe: true)
+      collection.update({:_id => key}, {'$set' => {:value => ActiveSupport::JSON.encode(value)}}, :upsert => true, :safe => true)
     end
 
     def [](key)
       load_dev_translations if Rails.env.development?
-      if document = collection.find_one(_id: key)
+      if document = collection.find_one(:_id => key)
         document["value"]
       else
         default_translation(key)

@@ -18,8 +18,8 @@ feature "Translations management", %q{
 
   scenario "Entering translations" do
     visit translate
-    fill_in "translations[pl.hello]", with: "Witaj, świecie"
-    fill_in "translations[de.hello]", with: "Wilkommen!"
+    fill_in "translations[pl.hello]", :with => "Witaj, świecie"
+    fill_in "translations[de.hello]", :with => "Wilkommen!"
     click_button "Save"
     visit homepage("pl")
     page.should have_content("Witaj, świecie")
