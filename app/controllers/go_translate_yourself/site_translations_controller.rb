@@ -3,7 +3,7 @@ module GoTranslateYourself
     before_filter :auth
 
     def edit
-      @translations = Hash[
+      @translations = hash_class[
         *GoTranslateYourself.current_store.keys_without_prefix.collect do |key| 
           [key, GoTranslateYourself.current_store.default_translation("dev.#{key}")]
         end.flatten
@@ -25,6 +25,10 @@ module GoTranslateYourself
 
     def auth
       GoTranslateYourself.auth_handler.bind(self).call if GoTranslateYourself.auth_handler.is_a? Proc
+    end
+
+    def hash_class
+      RUBY_VERSION < '1.9' ? ActiveSupport::OrderedHash : Hash
     end
   end
 end
