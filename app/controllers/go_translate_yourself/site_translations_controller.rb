@@ -18,7 +18,7 @@ module GoTranslateYourself
           GoTranslateYourself.current_store[key] = value
         end
       end
-      redirect_to site_translations_path
+      redirect_to site_translations_path, :notice => "Successful save"
     end
 
     private
