@@ -4,7 +4,7 @@ module GoTranslateYourself
   class BaseStore
 
     def keys
-      if @default_translations.nil? || @default_translations.empty? || Rails.env.development?
+      if @keys.nil? || Rails.env.development?
         load_default_translations
 
         @keys = GoTranslateYourself.locales.collect {|lang| keys_without_prefix.collect {|key| "#{lang}.#{key}"} }.flatten
