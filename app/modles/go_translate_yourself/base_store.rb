@@ -4,31 +4,38 @@ module GoTranslateYourself
   class BaseStore
 
     def keys
-      if @dev_translations.nil? || Rails.env.development?
-        load_dev_translations
+      if @default_translations.nil? || Rails.env.development?
+        load_default_translations
 
         @keys = GoTranslateYourself.locales.collect {|lang| keys_without_prefix.collect {|key| "#{lang}.#{key}"} }.flatten
       end
 
-      @keys 
+      @keys
     end
 
     def default_translation(key)
-      load_dev_translations unless @dev_translations
-      @dev_translations[key.to_s.gsub(/^[a-z]*\./, "")]
+      load_default_translations unless @default_translations
+      @default_translations[key] || @default_translations[key.to_s.gsub(/^[a-z]*\./, "dev.")]
     end
 
-    def keys_without_prefix 
-      load_dev_translations unless @dev_translations
-      @dev_translations.keys
+    def default_translation?(key)
+      !@default_translations[key].nil?
+    end
+
+    def keys_without_prefix
+      load_default_translations unless @default_translations
+      @default_translations.keys.map {|k| k.sub(/^[a-z]*\./, "") }.uniq
     end
 
     protected
 
-    def load_dev_translations
-      dev_translations = YAML.load_file(File.join(Rails.root, "config", "locales", "dev.yml"))
-      @dev_translations = {}
-      flatten_keys(nil, dev_translations["dev"], @dev_translations)
+    def load_default_translations
+      @default_translations = {}
+      Dir.glob(File.join(Rails.root, "config", "locales", "*.yml")).each do |locale_file|
+        translations = YAML.load_file(locale_file)
+        code = File.basename(locale_file).sub(".yml", "")
+        flatten_keys(code, translations[code], @default_translations)
+      end
     end
 
     def flatten_keys(current_key, hash, dest_hash)

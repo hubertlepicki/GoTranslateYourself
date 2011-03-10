@@ -27,4 +27,11 @@ describe GoTranslateYourself::MongoStore do
     @store["pl.hello"] = "Witaj, świec{{elo}}ie!"
     @store["pl.hello"].should eql("\"Witaj, \\u015bwiec{{elo}}ie!\"")
   end
+
+  it "should load read-only translations from all *.yml files in config directory, other than dev.yml" do
+    @store["pl.errors.blank"].should == "\"nie mo\\u017ce by\\u0107 puste\""
+    @store["pl.errors.required"].should == "\"jest wymagany\""
+    @store["de.errors.required"].should == "\"erforderlich ist\""
+    @store["de.errors.blank"].should == "\"come on, enter something\""
+  end
 end

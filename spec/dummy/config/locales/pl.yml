@@ -1,0 +1,4 @@
+pl:
+  errors:
+    blank: "nie może być puste"
+    required: "jest wymagany"

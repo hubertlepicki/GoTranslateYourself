@@ -28,5 +28,10 @@ feature "Translations management", %q{
     visit homepage("cy")
     page.should have_content("Hello world!")
   end
+
+  scenario "Seeing blocked translations" do
+    visit translate
+    page.should have_css("input[disabled='disabled']")
+  end
 end
 

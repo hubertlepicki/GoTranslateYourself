@@ -2,4 +2,7 @@ dev:
   hello: "Hello world!"
   site:
     name: "Some random web site"
-    
+  errors:
+    required: "go ahead, enter something"
+    blank: "come on, enter something"
+
