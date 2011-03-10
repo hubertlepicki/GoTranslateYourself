@@ -30,7 +30,7 @@ module GoTranslateYourself
     private
 
     def load_default_translations
-      @default_translations = {}
+      @default_translations = HashWithIndifferentAccess.new
       @mtime = dev_translations_mtime
       Dir.glob(File.join(Rails.root, "config", "locales", "*.yml")).each do |locale_file|
         translations = YAML.load_file(locale_file)
