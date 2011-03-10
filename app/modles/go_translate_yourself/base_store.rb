@@ -4,7 +4,7 @@ module GoTranslateYourself
   class BaseStore
 
     def keys
-      if @keys.nil? || Rails.env.development?
+      if @keys.nil? || (Rails.env.development? && dev_translations_mtime != @mtime)
         load_default_translations
 
         @keys = GoTranslateYourself.locales.collect {|lang| keys_without_prefix.collect {|key| "#{lang}.#{key}"} }.flatten
@@ -27,10 +27,11 @@ module GoTranslateYourself
       @default_translations.keys.map {|k| k.sub(/^[a-z]*\./, "") }.uniq
     end
 
-    protected
+    private
 
     def load_default_translations
       @default_translations = {}
+      @mtime = dev_translations_mtime
       Dir.glob(File.join(Rails.root, "config", "locales", "*.yml")).each do |locale_file|
         translations = YAML.load_file(locale_file)
         code = File.basename(locale_file).sub(".yml", "")
@@ -47,6 +48,10 @@ module GoTranslateYourself
           dest_hash[full_key] = ActiveSupport::JSON.encode(value)
         end
       end
+    end
+
+    def dev_translations_mtime
+      File.mtime("#{Rails.root}/config/locales/dev.yml")
     end
   end
 end
