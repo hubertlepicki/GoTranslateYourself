@@ -9,11 +9,7 @@ if RUBY_VERSION < '1.9'
 end
 
 gem "diff-lcs", "1.1.2", :require => nil
-gem "rspec-rails",        :git => "git://github.com/rspec/rspec-rails.git"
-gem "rspec",              :git => "git://github.com/rspec/rspec.git"
-gem "rspec-core",         :git => "git://github.com/rspec/rspec-core.git"
-gem "rspec-expectations", :git => "git://github.com/rspec/rspec-expectations.git"
-gem "rspec-mocks",        :git => "git://github.com/rspec/rspec-mocks.git"
+gem "rspec-rails"
 
 gem "steak",  :git => "git://github.com/cavalle/steak.git"
 gem "capybara", "0.3.9", :require => nil
