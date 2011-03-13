@@ -1,3 +1,7 @@
+= Achtung!
+
+This project is abandoned, and won't be continued. Next iteration is Translator engine, currently available at: "http://github.com/amberbit/translator". Much more translations love there.
+
 = GoTranslateYourself
 
 GoTranslateYouself is Rails 3 engine, that allows your clients to do the dirty work of translating applications on their own. You don't have to do it yourself, let them have a piece of fun of their own!
